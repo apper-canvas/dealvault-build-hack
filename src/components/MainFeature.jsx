@@ -85,9 +85,10 @@ const sampleDeals = [
     purchaseDate: '2024-01-05',
     source: 'AppSumo',
     status: 'refunded',
-    category: 'Email Marketing',
+category: 'Email Marketing',
     notes: 'Email marketing tool - refunded due to poor deliverability.',
     rating: 2,
+    refund_date: '2024-02-15',
     statusHistory: [
       { status: 'active', date: '2024-01-05T08:20:00.000Z' },
       { status: 'refunded', date: '2024-02-15T10:30:00.000Z' }
@@ -147,10 +148,10 @@ const sampleDeals = [
     notes: 'Team communication tool with better privacy features.',
     rating: 4,
     statusHistory: [
-      { status: 'active', date: '2024-04-18T09:15:00.000Z' }
+{ status: 'active', date: '2024-04-18T09:15:00.000Z' }
     ]
-},
-{
+  },
+  {
     id: '1703865600000',
     name: 'Photoshop Alternative',
     price: 129.00,
@@ -189,7 +190,7 @@ const MainFeature = () => {
   const [filterStatus, setFilterStatus] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
 
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     name: '',
     price: '',
     purchaseDate: format(new Date(), 'yyyy-MM-dd'),
@@ -197,7 +198,8 @@ const MainFeature = () => {
     status: 'active',
     category: '',
     notes: '',
-    rating: 3
+    rating: 3,
+    refund_date: ''
   })
 
   // Load deals from localStorage on mount
@@ -227,7 +229,7 @@ const MainFeature = () => {
     }
   }, [deals])
 
-  const resetForm = () => {
+const resetForm = () => {
     setFormData({
       name: '',
       price: '',
@@ -236,7 +238,8 @@ const MainFeature = () => {
       status: 'active',
       category: '',
       notes: '',
-      rating: 3
+      rating: 3,
+      refund_date: ''
     })
   }
 
@@ -279,10 +282,11 @@ const MainFeature = () => {
     setShowAddForm(false)
   }
 
-  const handleEdit = (deal) => {
+const handleEdit = (deal) => {
     setFormData({
       ...deal,
-      purchaseDate: format(parseISO(deal.purchaseDate), 'yyyy-MM-dd')
+      purchaseDate: format(parseISO(deal.purchaseDate), 'yyyy-MM-dd'),
+      refund_date: deal.refund_date ? format(parseISO(deal.refund_date), 'yyyy-MM-dd') : ''
     })
     setEditingDeal(deal)
     setShowAddForm(true)
@@ -640,9 +644,9 @@ const MainFeature = () => {
                           <span className={`status-badge w-fit ${getStatusColor(deal.status)}`}>
                             {deal.status}
                           </span>
-                        </div>
+</div>
                         
-<div className="flex flex-wrap items-center gap-4 text-sm text-surface-600 dark:text-surface-400">
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-surface-600 dark:text-surface-400">
                           <div className="flex items-center space-x-1">
                             <ApperIcon name="DollarSign" className="w-4 h-4" />
                             <span className="font-semibold text-lg text-surface-900 dark:text-white">
@@ -896,11 +900,24 @@ const MainFeature = () => {
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                       className="w-full px-4 py-2 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-surface-700 dark:border-surface-600 dark:text-white"
-                      placeholder="e.g., Productivity, Design"
+placeholder="e.g., Productivity, Design"
                     />
                   </div>
                 </div>
 
+                {formData.status === 'refunded' && (
+                  <div>
+                    <label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
+                      Refund Date
+                    </label>
+                    <input
+                      type="date"
+                      value={formData.refund_date}
+                      onChange={(e) => setFormData({ ...formData, refund_date: e.target.value })}
+                      className="w-full px-4 py-2 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-surface-700 dark:border-surface-600 dark:text-white"
+                    />
+                  </div>
+                )}
                 <div>
                   <label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
                     Rating (1-5)
