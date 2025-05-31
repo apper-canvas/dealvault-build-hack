@@ -87,11 +87,11 @@ const sampleDeals = [
     status: 'refunded',
     category: 'Email Marketing',
     notes: 'Email marketing tool - refunded due to poor deliverability.',
-    rating: 2,
-    statusHistory: [
+statusHistory: [
       { status: 'active', date: '2024-01-05T08:20:00.000Z' },
       { status: 'refunded', date: '2024-02-15T10:30:00.000Z' }
-    ]
+],
+    refund_date: '2024-02-15'
   },
   {
     id: '1703520000000',
@@ -197,7 +197,8 @@ const MainFeature = () => {
     status: 'active',
     category: '',
     notes: '',
-    rating: 3
+rating: 3,
+refund_date: ''
   })
 
   // Load deals from localStorage on mount
@@ -237,8 +238,8 @@ const MainFeature = () => {
       category: '',
       notes: '',
       rating: 3
-    })
-  }
+refund_date: ''
+})
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -665,6 +666,12 @@ const MainFeature = () => {
                           )}
                         </div>
 
+{deal.refund_date && deal.status === 'refunded' && (
+                          <div className="flex items-center space-x-1 text-sm text-surface-600 dark:text-surface-400 mt-1">
+                            <ApperIcon name="RotateCcw" className="w-4 h-4" />
+                            <span>Refunded on {format(parseISO(deal.refund_date), 'MMM dd, yyyy')}</span>
+                          </div>
+                        )}
                         {deal.notes && (
                           <p className="text-sm text-surface-600 dark:text-surface-400 mt-2">
                             {deal.notes}
@@ -895,6 +902,19 @@ const MainFeature = () => {
                   </div>
                 </div>
 
+{formData.status === 'refunded' && (
+                  <div>
+                    <label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
+                      Refund Date
+                    </label>
+                    <input
+                      type="date"
+                      value={formData.refund_date}
+                      onChange={(e) => setFormData({ ...formData, refund_date: e.target.value })}
+                      className="w-full px-4 py-2 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-surface-700 dark:border-surface-600 dark:text-white"
+                    />
+                  </div>
+                )}
                 <div>
                   <label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
                     Rating (1-5)
