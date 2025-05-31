@@ -149,6 +149,34 @@ const sampleDeals = [
     statusHistory: [
       { status: 'active', date: '2024-04-18T09:15:00.000Z' }
     ]
+},
+{
+    id: '1703865600000',
+    name: 'Photoshop Alternative',
+    price: 129.00,
+    purchaseDate: '2024-05-10',
+    source: 'StackSocial',
+    status: 'active',
+    category: 'Design',
+    notes: 'Professional photo editing software with AI features.',
+    rating: 4,
+    statusHistory: [
+      { status: 'active', date: '2024-05-10T14:20:00.000Z' }
+    ]
+  },
+  {
+    id: '1703952000000',
+    name: 'Project Management Pro',
+    price: 89.00,
+    purchaseDate: '2024-03-28',
+    source: 'AppSumo',
+    status: 'active',
+    category: 'Productivity',
+    notes: 'Advanced project management with team collaboration tools.',
+    rating: 5,
+    statusHistory: [
+      { status: 'active', date: '2024-03-28T11:45:00.000Z' }
+    ]
   }
 ];
 
