@@ -1,9 +1,9 @@
-import { useState, useEffect, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { toast } from 'react-toastify'
-import { format, startOfMonth, endOfMonth, isWithinInterval, parseISO } from 'date-fns'
-import ApperIcon from './ApperIcon'
-import Chart from 'react-apexcharts'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'react-toastify';
+import Chart from 'react-apexcharts';
+import { format, parseISO, startOfMonth, endOfMonth, isWithinInterval } from 'date-fns';
 
 // Sample deals data
 const sampleDeals = [
@@ -83,9 +83,9 @@ const sampleDeals = [
     name: 'Mailchimp Alternative',
     price: 67.00,
     purchaseDate: '2024-01-05',
-    source: 'AppSumo',
+source: 'AppSumo',
     status: 'refunded',
-category: 'Email Marketing',
+    category: 'Email Marketing',
     notes: 'Email marketing tool - refunded due to poor deliverability.',
     rating: 2,
     refund_date: '2024-02-15',
@@ -146,9 +146,9 @@ category: 'Email Marketing',
     status: 'active',
     category: 'Communication',
     notes: 'Team communication tool with better privacy features.',
-    rating: 4,
+rating: 4,
     statusHistory: [
-{ status: 'active', date: '2024-04-18T09:15:00.000Z' }
+      { status: 'active', date: '2024-04-18T09:15:00.000Z' }
     ]
   },
   {
@@ -190,7 +190,7 @@ const MainFeature = () => {
   const [filterStatus, setFilterStatus] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
 
-const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     name: '',
     price: '',
     purchaseDate: format(new Date(), 'yyyy-MM-dd'),
@@ -226,10 +226,10 @@ const [formData, setFormData] = useState({
   useEffect(() => {
     if (deals.length > 0) {
       localStorage.setItem('dealvault-deals', JSON.stringify(deals))
-    }
+}
   }, [deals])
 
-const resetForm = () => {
+  const resetForm = () => {
     setFormData({
       name: '',
       price: '',
@@ -279,10 +279,10 @@ const resetForm = () => {
     }
 
     resetForm()
-    setShowAddForm(false)
+setShowAddForm(false)
   }
 
-const handleEdit = (deal) => {
+  const handleEdit = (deal) => {
     setFormData({
       ...deal,
       purchaseDate: format(parseISO(deal.purchaseDate), 'yyyy-MM-dd'),
@@ -314,14 +314,13 @@ const handleEdit = (deal) => {
     }))
     toast.success(`Deal status updated to ${newStatus}`)
   }
+}
 
   // Analytics calculations
   const analytics = useMemo(() => {
     const now = new Date()
     const currentMonth = startOfMonth(now)
     const currentMonthEnd = endOfMonth(now)
-    
-    const currentMonthDeals = deals.filter(deal => 
       isWithinInterval(parseISO(deal.purchaseDate), { 
         start: currentMonth, 
         end: currentMonthEnd 
@@ -464,9 +463,11 @@ const handleEdit = (deal) => {
               <p className="text-2xl sm:text-3xl font-bold text-surface-900 dark:text-white">
                 ${analytics.lifetimeTotal.toFixed(2)}
               </p>
-            </div>
-            <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-xl flex items-center justify-center">
-              <ApperIcon name="TrendingUp" className="w-6 h-6 text-white" />
+</div>
+            <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
             </div>
           </div>
         </div>
@@ -478,9 +479,11 @@ const handleEdit = (deal) => {
               <p className="text-2xl sm:text-3xl font-bold text-surface-900 dark:text-white">
                 ${analytics.currentMonthTotal.toFixed(2)}
               </p>
-            </div>
-            <div className="w-12 h-12 bg-gradient-to-br from-secondary to-secondary-dark rounded-xl flex items-center justify-center">
-              <ApperIcon name="Calendar" className="w-6 h-6 text-white" />
+</div>
+            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
             </div>
           </div>
         </div>
@@ -492,9 +495,11 @@ const handleEdit = (deal) => {
               <p className="text-2xl sm:text-3xl font-bold text-surface-900 dark:text-white">
                 {analytics.totalDeals}
               </p>
-            </div>
-            <div className="w-12 h-12 bg-gradient-to-br from-accent to-orange-600 rounded-xl flex items-center justify-center">
-              <ApperIcon name="Package" className="w-6 h-6 text-white" />
+</div>
+            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
             </div>
           </div>
         </div>
@@ -506,9 +511,11 @@ const handleEdit = (deal) => {
               <p className="text-2xl sm:text-3xl font-bold text-surface-900 dark:text-white">
                 ${analytics.avgDealPrice.toFixed(2)}
               </p>
-            </div>
-            <div className="w-12 h-12 bg-gradient-to-br from-success to-green-700 rounded-xl flex items-center justify-center">
-              <ApperIcon name="BarChart3" className="w-6 h-6 text-white" />
+</div>
+            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
             </div>
           </div>
         </div>
@@ -533,9 +540,12 @@ const handleEdit = (deal) => {
                 activeTab === tab.id
                   ? 'bg-white dark:bg-surface-700 text-primary shadow-sm'
                   : 'text-surface-600 dark:text-surface-400 hover:text-surface-900 dark:hover:text-white'
-              }`}
+}`}
             >
-              <ApperIcon name={tab.icon} className="w-4 h-4" />
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {tab.icon === 'Package' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />}
+                {tab.icon === 'BarChart3' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />}
+              </svg>
               <span className="hidden sm:inline">{tab.label}</span>
             </button>
           ))}
@@ -545,9 +555,11 @@ const handleEdit = (deal) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setShowAddForm(true)}
-          className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl hover:shadow-glow transition-all"
+className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all"
         >
-          <ApperIcon name="Plus" className="w-4 h-4 sm:w-5 sm:h-5" />
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+          </svg>
           <span>Add Deal</span>
         </motion.button>
       </motion.div>
@@ -556,17 +568,17 @@ const handleEdit = (deal) => {
       <AnimatePresence mode="wait">
         {activeTab === 'deals' && (
           <motion.div
-            key="deals"
+key="deals"
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 20, opacity: 0 }}
-            className="space-y-6"
+            exit={{ x: -20, opacity: 0 }}
+            className="space-y-4 sm:space-y-6"
           >
-            {/* Filters */}
+            {/* Search and Filter Controls */}
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
                 <div className="relative">
-                  <ApperIcon name="Search" className="absolute left-3 top-3 w-4 h-4 text-surface-400" />
+                  <ApperIcon name="Search" className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-surface-400" />
                   <input
                     type="text"
                     placeholder="Search deals..."
@@ -576,61 +588,42 @@ const handleEdit = (deal) => {
                   />
                 </div>
               </div>
-              
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-2 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-surface-800 dark:border-surface-600 dark:text-white"
-              >
-                <option value="all">All Status</option>
-                <option value="active">Active</option>
-                <option value="dead">Dead</option>
-                <option value="refunded">Refunded</option>
-              </select>
-
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-surface-800 dark:border-surface-600 dark:text-white"
-              >
-                <option value="purchaseDate">Date</option>
-                <option value="name">Name</option>
-                <option value="price">Price</option>
-                <option value="status">Status</option>
-              </select>
+              <div className="flex gap-2">
+                <select
+                  value={filterStatus}
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                  className="px-3 py-2 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-surface-800 dark:border-surface-600 dark:text-white"
+                >
+                  <option value="all">All Status</option>
+                  <option value="active">Active</option>
+                  <option value="dead">Dead</option>
+                  <option value="refunded">Refunded</option>
+                </select>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-3 py-2 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-surface-800 dark:border-surface-600 dark:text-white"
+                >
+                  <option value="purchaseDate">Date</option>
+                  <option value="name">Name</option>
+                  <option value="price">Price</option>
+                  <option value="status">Status</option>
+                </select>
+              </div>
             </div>
 
             {/* Deals List */}
-            <div className="grid gap-4 sm:gap-6">
+            <div className="space-y-4">
               {filteredDeals.length === 0 ? (
-                <div className="deal-card p-8 sm:p-12 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-surface-100 dark:bg-surface-700 rounded-full flex items-center justify-center">
-                    <ApperIcon name="Package" className="w-8 h-8 text-surface-400" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-surface-900 dark:text-white mb-2">
-                    No deals found
-                  </h3>
-                  <p className="text-surface-600 dark:text-surface-400 mb-6">
-                    {deals.length === 0 
-                      ? "Start tracking your lifetime deals by adding your first purchase."
-                      : "Try adjusting your filters or search terms."
-                    }
-                  </p>
-                  {deals.length === 0 && (
-                    <button
-                      onClick={() => setShowAddForm(true)}
-                      className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl hover:shadow-glow transition-all"
-                    >
-                      <ApperIcon name="Plus" className="w-5 h-5" />
-                      <span>Add Your First Deal</span>
-                    </button>
-                  )}
+                <div className="text-center py-12">
+                  <ApperIcon name="Package" className="w-12 h-12 text-surface-400 mx-auto mb-4" />
+                  <p className="text-surface-600 dark:text-surface-400">No deals found</p>
                 </div>
               ) : (
                 filteredDeals.map((deal, index) => (
                   <motion.div
                     key={deal.id}
-                    initial={{ y: 20, opacity: 0 }}
+initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: index * 0.05 }}
                     className="deal-card p-4 sm:p-6"
@@ -642,9 +635,9 @@ const handleEdit = (deal) => {
                             {deal.name}
                           </h3>
                           <span className={`status-badge w-fit ${getStatusColor(deal.status)}`}>
-                            {deal.status}
+{deal.status}
                           </span>
-</div>
+                        </div>
                         
                         <div className="flex flex-wrap items-center gap-4 text-sm text-surface-600 dark:text-surface-400">
                           <div className="flex items-center space-x-1">
@@ -662,12 +655,12 @@ const handleEdit = (deal) => {
                             <span>{deal.source}</span>
                           </div>
                           {deal.category && (
+{deal.category && (
                             <div className="flex items-center space-x-1">
                               <ApperIcon name="Tag" className="w-4 h-4" />
-<span>{deal.category}</span>
+                              <span>{deal.category}</span>
                             </div>
                           )}
-                          {deal.refund_date && (
                             <div className="flex items-center space-x-1">
                               <ApperIcon name="RotateCcw" className="w-4 h-4" />
                               <span>Refunded: {format(parseISO(deal.refund_date), 'MMM dd, yyyy')}</span>
@@ -898,9 +891,9 @@ const handleEdit = (deal) => {
                     <input
                       type="text"
                       value={formData.category}
-                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                       className="w-full px-4 py-2 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-surface-700 dark:border-surface-600 dark:text-white"
-placeholder="e.g., Productivity, Design"
+                      placeholder="e.g., Productivity, Design"
                     />
                   </div>
                 </div>
