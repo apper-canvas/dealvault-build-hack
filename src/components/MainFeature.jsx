@@ -702,11 +702,12 @@ onClick={() => setActiveTab(tab.id)}
                     </motion.div>
                   </Link>
                 ))
-))
               )}
             </div>
           </motion.div>
         )}
+
+        {activeTab === 'analytics' && (
           <motion.div
             key="analytics"
             initial={{ x: 20, opacity: 0 }}
