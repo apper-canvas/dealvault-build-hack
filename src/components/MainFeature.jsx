@@ -642,7 +642,7 @@ const MainFeature = () => {
                           </span>
                         </div>
                         
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-surface-600 dark:text-surface-400">
+<div className="flex flex-wrap items-center gap-4 text-sm text-surface-600 dark:text-surface-400">
                           <div className="flex items-center space-x-1">
                             <ApperIcon name="DollarSign" className="w-4 h-4" />
                             <span className="font-semibold text-lg text-surface-900 dark:text-white">
@@ -661,6 +661,12 @@ const MainFeature = () => {
                             <div className="flex items-center space-x-1">
                               <ApperIcon name="Tag" className="w-4 h-4" />
                               <span>{deal.category}</span>
+                            </div>
+                          )}
+                          {deal.refund_date && (
+                            <div className="flex items-center space-x-1">
+                              <ApperIcon name="RotateCcw" className="w-4 h-4" />
+                              <span>Refunded: {format(parseISO(deal.refund_date), 'MMM dd, yyyy')}</span>
                             </div>
                           )}
                         </div>
