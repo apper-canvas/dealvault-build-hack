@@ -150,6 +150,34 @@ const sampleDeals = [
       { status: 'active', date: '2024-04-18T09:15:00.000Z' }
     ]
   }
+  {
+    id: '1703865600000',
+    name: 'Trello Business Class',
+    price: 119.00,
+    purchaseDate: '2024-03-15',
+    source: 'AppSumo',
+    status: 'active',
+    category: 'Project Management',
+    notes: 'Advanced project management with unlimited boards and automation.',
+    rating: 4,
+    statusHistory: [
+      { status: 'active', date: '2024-03-15T14:20:00.000Z' }
+    ]
+  },
+  {
+    id: '1703952000000',
+    name: 'Photoshop Elements',
+    price: 79.00,
+    purchaseDate: '2024-01-22',
+    source: 'Direct',
+    status: 'active',
+    category: 'Photo Editing',
+    notes: 'Simplified photo editing software with guided edits and effects.',
+    rating: 3,
+    statusHistory: [
+      { status: 'active', date: '2024-01-22T16:45:00.000Z' }
+    ]
+  }
 ];
 
 const MainFeature = () => {
