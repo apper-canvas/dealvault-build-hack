@@ -150,7 +150,8 @@ const sampleDeals = [
       { status: 'active', date: '2024-04-18T09:15:00.000Z' }
     ]
   }
-]
+];
+
 const MainFeature = () => {
   const [deals, setDeals] = useState([])
   const [showAddForm, setShowAddForm] = useState(false)
@@ -171,26 +172,32 @@ const MainFeature = () => {
     rating: 3
   })
 
-
-// Load deals from localStorage on mount
+  // Load deals from localStorage on mount
   useEffect(() => {
     const savedDeals = localStorage.getItem('dealvault-deals')
-    if (savedDeals) {
-      const parsedDeals = JSON.parse(savedDeals)
-      setDeals(parsedDeals)
-    } else {
-      // Initialize with sample data if no saved deals exist
-      setDeals(sampleDeals)
-      localStorage.setItem('dealvault-deals', JSON.stringify(sampleDeals))
+    if (savedDeals && savedDeals !== 'null' && savedDeals !== '[]') {
+      try {
+        const parsedDeals = JSON.parse(savedDeals)
+        if (Array.isArray(parsedDeals) && parsedDeals.length > 0) {
+          setDeals(parsedDeals)
+          return
+        }
+      } catch (error) {
+        console.error('Failed to parse saved deals:', error)
+      }
     }
+    
+    // Initialize with sample data if no valid saved deals exist
+    setDeals(sampleDeals)
+    localStorage.setItem('dealvault-deals', JSON.stringify(sampleDeals))
   }, [])
 
-  // Save deals to localStorage whenever deals change
-useEffect(() => {
-if (deals.length > 0) {
-localStorage.setItem('dealvault-deals', JSON.stringify(deals))
-}
-}, [deals])
+  // Save deals to localStorage whenever deals change (but not on initial empty state)
+  useEffect(() => {
+    if (deals.length > 0) {
+      localStorage.setItem('dealvault-deals', JSON.stringify(deals))
+    }
+  }, [deals])
 
   const resetForm = () => {
     setFormData({
