@@ -5,6 +5,153 @@ import { format, startOfMonth, endOfMonth, isWithinInterval, parseISO } from 'da
 import ApperIcon from './ApperIcon'
 import Chart from 'react-apexcharts'
 
+// Sample deals data
+const sampleDeals = [
+  {
+    id: '1703001600000',
+    name: 'Notion Lifetime Deal',
+    price: 59.00,
+    purchaseDate: '2024-01-15',
+    source: 'AppSumo',
+    status: 'active',
+    category: 'Productivity',
+    notes: 'All-in-one workspace for notes, tasks, wikis, and databases.',
+    rating: 5,
+    statusHistory: [
+      { status: 'active', date: '2024-01-15T10:30:00.000Z' }
+    ]
+  },
+  {
+    id: '1703088000000',
+    name: 'Figma Professional',
+    price: 89.00,
+    purchaseDate: '2024-02-03',
+    source: 'PitchGround',
+    status: 'active',
+    category: 'Design',
+    notes: 'UI/UX design tool with real-time collaboration features.',
+    rating: 4,
+    statusHistory: [
+      { status: 'active', date: '2024-02-03T14:15:00.000Z' }
+    ]
+  },
+  {
+    id: '1703174400000',
+    name: 'ClickFunnels LTD',
+    price: 297.00,
+    purchaseDate: '2024-01-28',
+    source: 'FB Group',
+    status: 'dead',
+    category: 'Marketing',
+    notes: 'Sales funnel builder - company went out of business.',
+    rating: 2,
+    statusHistory: [
+      { status: 'active', date: '2024-01-28T09:45:00.000Z' },
+      { status: 'dead', date: '2024-05-12T16:20:00.000Z' }
+    ]
+  },
+  {
+    id: '1703260800000',
+    name: 'Grammarly Premium',
+    price: 39.00,
+    purchaseDate: '2024-03-10',
+    source: 'AppSumo',
+    status: 'active',
+    category: 'Writing',
+    notes: 'AI-powered writing assistant for grammar and style.',
+    rating: 4,
+    statusHistory: [
+      { status: 'active', date: '2024-03-10T11:30:00.000Z' }
+    ]
+  },
+  {
+    id: '1703347200000',
+    name: 'Canva Pro Lifetime',
+    price: 49.00,
+    purchaseDate: '2024-02-20',
+    source: 'Direct',
+    status: 'active',
+    category: 'Design',
+    notes: 'Graphic design platform with premium templates.',
+    rating: 5,
+    statusHistory: [
+      { status: 'active', date: '2024-02-20T13:45:00.000Z' }
+    ]
+  },
+  {
+    id: '1703433600000',
+    name: 'Mailchimp Alternative',
+    price: 67.00,
+    purchaseDate: '2024-01-05',
+    source: 'AppSumo',
+    status: 'refunded',
+    category: 'Email Marketing',
+    notes: 'Email marketing tool - refunded due to poor deliverability.',
+    rating: 2,
+    statusHistory: [
+      { status: 'active', date: '2024-01-05T08:20:00.000Z' },
+      { status: 'refunded', date: '2024-02-15T10:30:00.000Z' }
+    ]
+  },
+  {
+    id: '1703520000000',
+    name: 'Airtable Pro',
+    price: 79.00,
+    purchaseDate: '2024-03-22',
+    source: 'PitchGround',
+    status: 'active',
+    category: 'Database',
+    notes: 'Spreadsheet-database hybrid for project management.',
+    rating: 4,
+    statusHistory: [
+      { status: 'active', date: '2024-03-22T15:10:00.000Z' }
+    ]
+  },
+  {
+    id: '1703606400000',
+    name: 'Loom Screen Recorder',
+    price: 25.00,
+    purchaseDate: '2024-04-05',
+    source: 'AppSumo',
+    status: 'active',
+    category: 'Video',
+    notes: 'Simple screen recording tool for quick demos.',
+    rating: 3,
+    statusHistory: [
+      { status: 'active', date: '2024-04-05T12:00:00.000Z' }
+    ]
+  },
+  {
+    id: '1703692800000',
+    name: 'Social Media Scheduler',
+    price: 45.00,
+    purchaseDate: '2024-02-14',
+    source: 'FB Group',
+    status: 'dead',
+    category: 'Social Media',
+    notes: 'Platform shut down after 6 months.',
+    rating: 1,
+    statusHistory: [
+      { status: 'active', date: '2024-02-14T16:30:00.000Z' },
+      { status: 'dead', date: '2024-08-20T14:45:00.000Z' }
+    ]
+  },
+  {
+    id: '1703779200000',
+    name: 'Slack Alternative',
+    price: 99.00,
+    purchaseDate: '2024-04-18',
+    source: 'Direct',
+    status: 'active',
+    category: 'Communication',
+    notes: 'Team communication tool with better privacy features.',
+    rating: 4,
+    statusHistory: [
+      { status: 'active', date: '2024-04-18T09:15:00.000Z' }
+    ]
+  }
+]
+
 const MainFeature = () => {
   const [deals, setDeals] = useState([])
   const [showAddForm, setShowAddForm] = useState(false)
@@ -25,161 +172,17 @@ const MainFeature = () => {
     rating: 3
   })
 
-// Sample deals data
-  const sampleDeals = [
-    {
-      id: '1703001600000',
-      name: 'Notion Lifetime Deal',
-      price: 59.00,
-      purchaseDate: '2024-01-15',
-      source: 'AppSumo',
-      status: 'active',
-      category: 'Productivity',
-      notes: 'All-in-one workspace for notes, tasks, wikis, and databases.',
-      rating: 5,
-      statusHistory: [
-        { status: 'active', date: '2024-01-15T10:30:00.000Z' }
-      ]
-    },
-    {
-      id: '1703088000000',
-      name: 'Figma Professional',
-      price: 89.00,
-      purchaseDate: '2024-02-03',
-      source: 'PitchGround',
-      status: 'active',
-      category: 'Design',
-      notes: 'UI/UX design tool with real-time collaboration features.',
-      rating: 4,
-      statusHistory: [
-        { status: 'active', date: '2024-02-03T14:15:00.000Z' }
-      ]
-    },
-    {
-      id: '1703174400000',
-      name: 'ClickFunnels LTD',
-      price: 297.00,
-      purchaseDate: '2024-01-28',
-      source: 'FB Group',
-      status: 'dead',
-      category: 'Marketing',
-      notes: 'Sales funnel builder - company went out of business.',
-      rating: 2,
-      statusHistory: [
-        { status: 'active', date: '2024-01-28T09:45:00.000Z' },
-        { status: 'dead', date: '2024-05-12T16:20:00.000Z' }
-      ]
-    },
-    {
-      id: '1703260800000',
-      name: 'Grammarly Premium',
-      price: 39.00,
-      purchaseDate: '2024-03-10',
-      source: 'AppSumo',
-      status: 'active',
-      category: 'Writing',
-      notes: 'AI-powered writing assistant for grammar and style.',
-      rating: 4,
-      statusHistory: [
-        { status: 'active', date: '2024-03-10T11:30:00.000Z' }
-      ]
-    },
-    {
-      id: '1703347200000',
-      name: 'Canva Pro Lifetime',
-      price: 49.00,
-      purchaseDate: '2024-02-20',
-      source: 'Direct',
-      status: 'active',
-      category: 'Design',
-      notes: 'Graphic design platform with premium templates.',
-      rating: 5,
-      statusHistory: [
-        { status: 'active', date: '2024-02-20T13:45:00.000Z' }
-      ]
-    },
-    {
-      id: '1703433600000',
-      name: 'Mailchimp Alternative',
-      price: 67.00,
-      purchaseDate: '2024-01-05',
-      source: 'AppSumo',
-      status: 'refunded',
-      category: 'Email Marketing',
-      notes: 'Email marketing tool - refunded due to poor deliverability.',
-      rating: 2,
-      statusHistory: [
-        { status: 'active', date: '2024-01-05T08:20:00.000Z' },
-        { status: 'refunded', date: '2024-02-15T10:30:00.000Z' }
-      ]
-    },
-    {
-      id: '1703520000000',
-      name: 'Airtable Pro',
-      price: 79.00,
-      purchaseDate: '2024-03-22',
-      source: 'PitchGround',
-      status: 'active',
-      category: 'Database',
-      notes: 'Spreadsheet-database hybrid for project management.',
-      rating: 4,
-      statusHistory: [
-        { status: 'active', date: '2024-03-22T15:10:00.000Z' }
-      ]
-    },
-    {
-      id: '1703606400000',
-      name: 'Loom Screen Recorder',
-      price: 25.00,
-      purchaseDate: '2024-04-05',
-      source: 'AppSumo',
-      status: 'active',
-      category: 'Video',
-      notes: 'Simple screen recording tool for quick demos.',
-      rating: 3,
-      statusHistory: [
-        { status: 'active', date: '2024-04-05T12:00:00.000Z' }
-      ]
-    },
-    {
-      id: '1703692800000',
-      name: 'Social Media Scheduler',
-      price: 45.00,
-      purchaseDate: '2024-02-14',
-      source: 'FB Group',
-      status: 'dead',
-      category: 'Social Media',
-      notes: 'Platform shut down after 6 months.',
-      rating: 1,
-      statusHistory: [
-        { status: 'active', date: '2024-02-14T16:30:00.000Z' },
-        { status: 'dead', date: '2024-08-20T14:45:00.000Z' }
-      ]
-    },
-    {
-      id: '1703779200000',
-      name: 'Slack Alternative',
-      price: 99.00,
-      purchaseDate: '2024-04-18',
-      source: 'Direct',
-      status: 'active',
-      category: 'Communication',
-      notes: 'Team communication tool with better privacy features.',
-      rating: 4,
-      statusHistory: [
-        { status: 'active', date: '2024-04-18T09:15:00.000Z' }
-      ]
-    }
-  ]
 
-  // Load deals from localStorage on mount
+// Load deals from localStorage on mount
   useEffect(() => {
     const savedDeals = localStorage.getItem('dealvault-deals')
     if (savedDeals) {
-      setDeals(JSON.parse(savedDeals))
+      const parsedDeals = JSON.parse(savedDeals)
+      setDeals(parsedDeals)
     } else {
       // Initialize with sample data if no saved deals exist
       setDeals(sampleDeals)
+      localStorage.setItem('dealvault-deals', JSON.stringify(sampleDeals))
     }
   }, [])
 
