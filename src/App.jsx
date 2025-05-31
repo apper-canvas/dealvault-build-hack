@@ -7,11 +7,11 @@ import NotFound from './pages/NotFound'
 function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-surface-900 dark:via-surface-800 dark:to-surface-900">
-      <Routes>
+<Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/deal/:id" element={<Deal />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      
       <ToastContainer
         position="top-right"
         autoClose={3000}
