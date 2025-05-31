@@ -91,8 +91,8 @@ const sampleDeals = [
     statusHistory: [
       { status: 'active', date: '2024-01-05T08:20:00.000Z' },
       { status: 'refunded', date: '2024-02-15T10:30:00.000Z' }
-    ]
-  },
+],
+    refund_date: '2024-02-15'
   {
     id: '1703520000000',
     name: 'Airtable Pro',
@@ -197,7 +197,8 @@ const MainFeature = () => {
     status: 'active',
     category: '',
     notes: '',
-    rating: 3
+rating: 3,
+    refund_date: ''
   })
 
   // Load deals from localStorage on mount
@@ -236,7 +237,8 @@ const MainFeature = () => {
       status: 'active',
       category: '',
       notes: '',
-      rating: 3
+rating: 3,
+      refund_date: ''
     })
   }
 
@@ -256,6 +258,7 @@ const MainFeature = () => {
       statusHistory: editingDeal?.statusHistory || [
         { status: formData.status, date: new Date().toISOString() }
       ]
+refund_date: formData.refund_date || null
     }
 
     if (editingDeal) {
@@ -665,6 +668,12 @@ const MainFeature = () => {
                           )}
                         </div>
 
+{deal.status === 'refunded' && deal.refund_date && (
+                          <div className="flex items-center space-x-1 text-sm text-surface-600 dark:text-surface-400">
+                            <ApperIcon name="Calendar" className="w-4 h-4" />
+                            <span>Refunded: {format(parseISO(deal.refund_date), 'MMM dd, yyyy')}</span>
+                          </div>
+                        )}
                         {deal.notes && (
                           <p className="text-sm text-surface-600 dark:text-surface-400 mt-2">
                             {deal.notes}
@@ -895,6 +904,19 @@ const MainFeature = () => {
                   </div>
                 </div>
 
+{formData.status === 'refunded' && (
+                  <div>
+                    <label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
+                      Refund Date
+                    </label>
+                    <input
+                      type="date"
+                      value={formData.refund_date}
+                      onChange={(e) => setFormData({ ...formData, refund_date: e.target.value })}
+                      className="w-full px-4 py-2 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-surface-700 dark:border-surface-600 dark:text-white"
+                    />
+                  </div>
+                )}
                 <div>
                   <label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
                     Rating (1-5)
