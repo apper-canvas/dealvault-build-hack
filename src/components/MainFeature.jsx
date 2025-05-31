@@ -186,9 +186,11 @@ const MainFeature = () => {
   }, [])
 
   // Save deals to localStorage whenever deals change
-  useEffect(() => {
-    localStorage.setItem('dealvault-deals', JSON.stringify(deals))
-  }, [deals])
+useEffect(() => {
+if (deals.length > 0) {
+localStorage.setItem('dealvault-deals', JSON.stringify(deals))
+}
+}, [deals])
 
   const resetForm = () => {
     setFormData({
