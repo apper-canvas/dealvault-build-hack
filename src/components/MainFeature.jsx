@@ -621,10 +621,11 @@ whileTap={{ scale: 0.95 }}
                   <p className="text-surface-600 dark:text-surface-400">No deals found</p>
 <p className="text-surface-600 dark:text-surface-400">No deals found</p>
                 </div>
-              ) : (
+) : (
                 filteredDeals.map((deal, index) => (
                   <Link 
                     key={deal.id}
+                    to={`/deal/${deal.id}`}
                     className="block hover:scale-[1.02] transition-transform cursor-pointer"
                   >
                     <motion.div
