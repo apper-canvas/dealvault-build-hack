@@ -34,19 +34,19 @@ const Deal = () => {
     refund_date: ''
   })
 
-  // Sample deals data - in a real app, this would come from a data store or API
+// Sample deals data - in a real app, this would come from a data store or API
   const sampleDeals = [
     {
-      id: 1,
+      id: "1",
       name: "AppSumo - Lifetime Deal Pack",
       purchase_date: "2024-01-15",
       amount: 79,
       source: "AppSumo",
       status: "active",
-      category: "Software Tools"
+category: "Software Tools"
     },
     {
-      id: 2,
+      id: "2",
       name: "PitchGround - Marketing Suite",
       purchase_date: "2024-02-08",
       amount: 59,
@@ -55,17 +55,17 @@ const Deal = () => {
       category: "Marketing"
     },
     {
-      id: 3,
+      id: "3",
       name: "DealMirror - Design Package",
       purchase_date: "2024-01-22",
       amount: 99,
       source: "DealMirror",
       status: "refunded",
-      category: "Design",
+category: "Design",
       refund_date: "2024-02-15"
     },
     {
-      id: 4,
+      id: "4",
       name: "SaaS Mantra - Analytics Pro",
       purchase_date: "2024-03-01",
       amount: 129,
@@ -74,7 +74,7 @@ const Deal = () => {
       category: "Analytics"
     },
     {
-      id: 5,
+      id: "5",
       name: "Stellar Deals - Email Tool",
       purchase_date: "2024-02-14",
       amount: 39,
@@ -84,10 +84,10 @@ const Deal = () => {
     }
   ]
 
-  useEffect(() => {
+useEffect(() => {
     // Simulate loading and finding the deal
     const timer = setTimeout(() => {
-      const foundDeal = sampleDeals.find(d => d.id === parseInt(id))
+      const foundDeal = sampleDeals.find(d => d.id === id)
       setDeal(foundDeal)
       if (foundDeal) {
         setFormData({

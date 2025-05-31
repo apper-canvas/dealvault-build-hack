@@ -17,12 +17,12 @@ const sampleDeals = [
     notes: 'All-in-one workspace for notes, tasks, wikis, and databases.',
     rating: 5,
     statusHistory: [
-      { status: 'active', date: '2024-01-15T10:30:00.000Z' }
+      { status: 'active', date: '2024-01-15T14:15:00.000Z' }
     ]
   },
   {
-    id: '1703088000000',
-    name: 'Figma Professional',
+    id: '1703087200000',
+    name: 'Figma Alternative',
     price: 89.00,
     purchaseDate: '2024-02-03',
     source: 'PitchGround',
@@ -78,9 +78,9 @@ const sampleDeals = [
     ]
   },
   {
-id: '1703433600000',
-    name: 'Mailchimp Alternative',
-    price: 79.00,
+    id: '1703433600000',
+    name: 'MailerLite Alternative',
+    price: 69.00,
     purchaseDate: '2024-01-05',
     source: 'AppSumo',
     status: 'refunded',
@@ -123,31 +123,31 @@ id: '1703433600000',
   },
   {
     id: '1703692800000',
-    name: 'Social Media Scheduler',
-    price: 45.00,
-    purchaseDate: '2024-02-14',
+    name: 'Social Media Tool',
+    price: 149.00,
+    purchaseDate: '2024-01-20',
     source: 'FB Group',
     status: 'dead',
     category: 'Social Media',
     notes: 'Platform shut down after 6 months.',
     rating: 1,
     statusHistory: [
-      { status: 'active', date: '2024-02-14T16:30:00.000Z' },
-      { status: 'dead', date: '2024-08-20T14:45:00.000Z' }
+      { status: 'active', date: '2024-01-20T16:30:00.000Z' },
+      { status: 'dead', date: '2024-07-20T10:00:00.000Z' }
     ]
   },
   {
     id: '1703779200000',
-    name: 'Slack Alternative',
+    name: 'Team Chat Pro',
     price: 99.00,
     purchaseDate: '2024-04-18',
-source: 'Direct',
+    source: 'Direct',
     status: 'active',
     category: 'Communication',
-    notes: 'Team communication tool with better privacy features.',
+    notes: 'Slack alternative with lifetime deal.',
     rating: 4,
     statusHistory: [
-      { status: 'active', date: '2024-04-18T09:15:00.000Z' }
+      { status: 'active', date: '2024-04-18T11:15:00.000Z' }
     ]
   },
   {
@@ -221,13 +221,12 @@ const MainFeature = () => {
     localStorage.setItem('dealvault-deals', JSON.stringify(sampleDeals))
   }, [])
 
-  // Save deals to localStorage whenever deals change (but not on initial empty state)
-useEffect(() => {
+// Save deals to localStorage whenever deals change (but not on initial empty state)
+  useEffect(() => {
     if (deals.length > 0) {
       localStorage.setItem('dealvault-deals', JSON.stringify(deals))
     }
   }, [deals])
-
   const resetForm = () => {
     setFormData({
       name: '',
@@ -274,26 +273,27 @@ useEffect(() => {
       setEditingDeal(null)
     } else {
       setDeals([...deals, dealData])
-      toast.success('Deal added successfully!')
+toast.success('Deal added successfully!')
     }
-resetForm()
+    resetForm()
     setShowAddForm(false)
   }
 
-const handleEdit = (deal) => {
+  const handleEdit = (deal) => {
     setFormData({
       ...deal,
       purchaseDate: format(parseISO(deal.purchaseDate), 'yyyy-MM-dd'),
       refund_date: deal.refund_date ? format(parseISO(deal.refund_date), 'yyyy-MM-dd') : ''
     })
     setEditingDeal(deal)
+setEditingDeal(deal)
     setShowAddForm(true)
   }
+  
   const handleDelete = (dealId) => {
     setDeals(deals.filter(deal => deal.id !== dealId))
     toast.success('Deal deleted successfully!')
   }
-
   const handleStatusUpdate = (dealId, newStatus) => {
     setDeals(deals.map(deal => {
       if (deal.id === dealId) {
@@ -307,9 +307,9 @@ const handleEdit = (deal) => {
         }
         return updatedDeal
       }
-      return deal
+return deal
     }))
-toast.success(`Deal status updated to ${newStatus}`)
+    toast.success(`Deal status updated to ${newStatus}`)
   }
 
   // Analytics calculations
@@ -458,9 +458,9 @@ toast.success(`Deal status updated to ${newStatus}`)
             <div>
               <p className="text-sm font-medium text-surface-600 dark:text-surface-400">Lifetime Total</p>
               <p className="text-2xl sm:text-3xl font-bold text-surface-900 dark:text-white">
-                ${analytics.lifetimeTotal.toFixed(2)}
+${analytics.lifetimeTotal.toFixed(2)}
               </p>
-</div>
+            </div>
             <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -474,9 +474,9 @@ toast.success(`Deal status updated to ${newStatus}`)
             <div>
               <p className="text-sm font-medium text-surface-600 dark:text-surface-400">This Month</p>
               <p className="text-2xl sm:text-3xl font-bold text-surface-900 dark:text-white">
-                ${analytics.currentMonthTotal.toFixed(2)}
+${analytics.currentMonthTotal.toFixed(2)}
               </p>
-</div>
+            </div>
             <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -490,9 +490,9 @@ toast.success(`Deal status updated to ${newStatus}`)
             <div>
               <p className="text-sm font-medium text-surface-600 dark:text-surface-400">Total Deals</p>
               <p className="text-2xl sm:text-3xl font-bold text-surface-900 dark:text-white">
-                {analytics.totalDeals}
+{analytics.totalDeals}
               </p>
-</div>
+            </div>
             <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -506,9 +506,9 @@ toast.success(`Deal status updated to ${newStatus}`)
             <div>
               <p className="text-sm font-medium text-surface-600 dark:text-surface-400">Avg Deal</p>
               <p className="text-2xl sm:text-3xl font-bold text-surface-900 dark:text-white">
-                ${analytics.avgDealPrice.toFixed(2)}
+${analytics.avgDealPrice.toFixed(2)}
               </p>
-</div>
+            </div>
             <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -534,10 +534,10 @@ toast.success(`Deal status updated to ${newStatus}`)
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                activeTab === tab.id
-                  ? 'bg-white dark:bg-surface-700 text-primary shadow-sm'
-                  : 'text-surface-600 dark:text-surface-400 hover:text-surface-900 dark:hover:text-white'
-}`}
+activeTab === tab.id
+                ? 'bg-white dark:bg-surface-700 text-primary shadow-sm'
+                : 'text-surface-600 dark:text-surface-400 hover:text-surface-900 dark:hover:text-white'
+              }`}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {tab.icon === 'Package' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />}
@@ -550,9 +550,9 @@ toast.success(`Deal status updated to ${newStatus}`)
 
         <motion.button
           whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+whileTap={{ scale: 0.95 }}
           onClick={() => setShowAddForm(true)}
-className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all"
+          className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all"
         >
           <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -561,9 +561,9 @@ className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-
         </motion.button>
       </motion.div>
 
-      {/* Tab Content */}
+{/* Tab Content */}
       <AnimatePresence mode="wait">
-{activeTab === 'deals' && (
+        {activeTab === 'deals' && (
           <motion.div
             key="deals"
             initial={{ x: -20, opacity: 0 }}
@@ -571,9 +571,9 @@ className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-
             exit={{ x: -20, opacity: 0 }}
             className="space-y-4 sm:space-y-6"
           >
-            {/* Search and Filter Controls */}
+{/* Search and Filter Controls */}
             <div className="flex flex-col sm:flex-row gap-4">
-<div className="flex-1">
+              <div className="flex-1">
                 <div className="relative">
                   <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-surface-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -611,20 +611,20 @@ className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-
               </div>
             </div>
 
-            {/* Deals List */}
+{/* Deals List */}
             <div className="space-y-4">
-{filteredDeals.length === 0 ? (
+              {filteredDeals.length === 0 ? (
                 <div className="text-center py-12">
                   <svg className="w-12 h-12 text-surface-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>
                   <p className="text-surface-600 dark:text-surface-400">No deals found</p>
+<p className="text-surface-600 dark:text-surface-400">No deals found</p>
                 </div>
               ) : (
-filteredDeals.map((deal, index) => (
+                filteredDeals.map((deal, index) => (
                   <Link 
-                    key={deal.id} 
-                    to={`/deal/${deal.id}`}
+                    key={deal.id}
                     className="block hover:scale-[1.02] transition-transform cursor-pointer"
                   >
                     <motion.div
@@ -730,7 +730,7 @@ filteredDeals.map((deal, index) => (
                         </div>
                       </div>
                     </motion.div>
-                  </Link>
+</Link>
                 ))
               )}
             </div>
@@ -749,9 +749,9 @@ filteredDeals.map((deal, index) => (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               <div className="metric-card">
                 <div className="flex items-center justify-between">
-                  <div>
+<div>
                     <p className="text-sm font-medium text-surface-600 dark:text-surface-400">Active Deals</p>
-<p className="text-2xl font-bold text-success">{analytics.activeDeals}</p>
+                    <p className="text-2xl font-bold text-success">{analytics.activeDeals}</p>
                   </div>
                   <svg className="w-8 h-8 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -761,9 +761,9 @@ filteredDeals.map((deal, index) => (
 
               <div className="metric-card">
                 <div className="flex items-center justify-between">
-                  <div>
+<div>
                     <p className="text-sm font-medium text-surface-600 dark:text-surface-400">Dead Deals</p>
-<p className="text-2xl font-bold text-danger">{analytics.deadDeals}</p>
+                    <p className="text-2xl font-bold text-danger">{analytics.deadDeals}</p>
                   </div>
                   <svg className="w-8 h-8 text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -773,9 +773,9 @@ filteredDeals.map((deal, index) => (
 
               <div className="metric-card">
                 <div className="flex items-center justify-between">
-                  <div>
+<div>
                     <p className="text-sm font-medium text-surface-600 dark:text-surface-400">Refunded</p>
-<p className="text-2xl font-bold text-warning">{analytics.refundedDeals}</p>
+                    <p className="text-2xl font-bold text-warning">{analytics.refundedDeals}</p>
                   </div>
                   <svg className="w-8 h-8 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
@@ -836,9 +836,9 @@ filteredDeals.map((deal, index) => (
                   onClick={() => {
                     setShowAddForm(false)
                     setEditingDeal(null)
-                    resetForm()
+resetForm()
                   }}
-className="p-2 hover:bg-surface-100 dark:hover:bg-surface-700 rounded-lg transition-colors"
+                  className="p-2 hover:bg-surface-100 dark:hover:bg-surface-700 rounded-lg transition-colors"
                 >
                   <svg className="w-5 h-5 text-surface-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -918,9 +918,9 @@ className="p-2 hover:bg-surface-100 dark:hover:bg-surface-700 rounded-lg transit
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
+<label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
                       Category
-</label>
+                    </label>
                     <input
                       type="text"
                       value={formData.category}
@@ -953,10 +953,10 @@ className="p-2 hover:bg-surface-100 dark:hover:bg-surface-700 rounded-lg transit
                       <button
                         key={star}
                         type="button"
-                        onClick={() => setFormData({ ...formData, rating: star })}
+onClick={() => setFormData({ ...formData, rating: star })}
                         className={`p-1 rounded transition-colors ${
                           star <= formData.rating ? 'text-yellow-400' : 'text-surface-300'
-}`}
+                        }`}
                       >
                         <svg className="w-5 h-5 fill-current" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
