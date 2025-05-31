@@ -34,7 +34,7 @@ const sampleDeals = [
       { status: 'active', date: '2024-02-03T14:15:00.000Z' }
     ]
   },
-  {
+{
     id: '1703174400000',
     name: 'ClickFunnels LTD',
     price: 297.00,
@@ -42,50 +42,22 @@ const sampleDeals = [
     source: 'FB Group',
     status: 'dead',
     category: 'Marketing',
-    notes: 'Sales funnel builder - company went out of business.',
+    notes: 'Sales funnel builder with lifetime access.',
     rating: 2,
     statusHistory: [
-      { status: 'active', date: '2024-01-28T09:45:00.000Z' },
-      { status: 'dead', date: '2024-05-12T16:20:00.000Z' }
+      { status: 'active', date: '2024-01-28T09:15:00.000Z' },
+      { status: 'dead', date: '2024-08-15T14:30:00.000Z' }
     ]
   },
   {
     id: '1703260800000',
-    name: 'Grammarly Premium',
-    price: 39.00,
-    purchaseDate: '2024-03-10',
-    source: 'AppSumo',
-    status: 'active',
-    category: 'Writing',
-    notes: 'AI-powered writing assistant for grammar and style.',
-    rating: 4,
-    statusHistory: [
-      { status: 'active', date: '2024-03-10T11:30:00.000Z' }
-    ]
-  },
-  {
-    id: '1703347200000',
-    name: 'Canva Pro Lifetime',
-    price: 49.00,
-    purchaseDate: '2024-02-20',
-    source: 'Direct',
-    status: 'active',
-    category: 'Design',
-    notes: 'Graphic design platform with premium templates.',
-    rating: 5,
-    statusHistory: [
-      { status: 'active', date: '2024-02-20T13:45:00.000Z' }
-    ]
-  },
-  {
-    id: '1703433600000',
-    name: 'MailerLite Alternative',
-    price: 69.00,
+    name: 'Database Management Pro',
+    price: 79.00,
     purchaseDate: '2024-01-05',
     source: 'AppSumo',
     status: 'refunded',
-    category: 'Email Marketing',
-    notes: 'Email marketing tool - refunded due to poor deliverability.',
+    category: 'Database',
+    notes: 'Had to request refund due to poor performance.',
     rating: 2,
     refund_date: '2024-02-15',
     statusHistory: [
@@ -227,6 +199,7 @@ const MainFeature = () => {
       localStorage.setItem('dealvault-deals', JSON.stringify(deals))
     }
   }, [deals])
+
   const resetForm = () => {
     setFormData({
       name: '',
@@ -271,9 +244,9 @@ const MainFeature = () => {
       setDeals(deals.map(deal => deal.id === editingDeal.id ? dealData : deal))
       toast.success('Deal updated successfully!')
       setEditingDeal(null)
-    } else {
+} else {
       setDeals([...deals, dealData])
-toast.success('Deal added successfully!')
+      toast.success('Deal added successfully!')
     }
     resetForm()
     setShowAddForm(false)
@@ -284,12 +257,10 @@ toast.success('Deal added successfully!')
       ...deal,
       purchaseDate: format(parseISO(deal.purchaseDate), 'yyyy-MM-dd'),
       refund_date: deal.refund_date ? format(parseISO(deal.refund_date), 'yyyy-MM-dd') : ''
-    })
+})
     setEditingDeal(deal)
-setEditingDeal(deal)
     setShowAddForm(true)
   }
-  
   const handleDelete = (dealId) => {
     setDeals(deals.filter(deal => deal.id !== dealId))
     toast.success('Deal deleted successfully!')
@@ -305,13 +276,12 @@ setEditingDeal(deal)
             { status: newStatus, date: new Date().toISOString() }
           ]
         }
-        return updatedDeal
+return updatedDeal
       }
-return deal
+      return deal
     }))
     toast.success(`Deal status updated to ${newStatus}`)
   }
-
   // Analytics calculations
   const analytics = useMemo(() => {
     const now = new Date()
@@ -532,11 +502,11 @@ ${analytics.avgDealPrice.toFixed(2)}
           ].map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+onClick={() => setActiveTab(tab.id)}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-activeTab === tab.id
-                ? 'bg-white dark:bg-surface-700 text-primary shadow-sm'
-                : 'text-surface-600 dark:text-surface-400 hover:text-surface-900 dark:hover:text-white'
+                activeTab === tab.id
+                  ? 'bg-white dark:bg-surface-700 text-primary shadow-sm'
+                  : 'text-surface-600 dark:text-surface-400 hover:text-surface-900 dark:hover:text-white'
               }`}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -548,9 +518,9 @@ activeTab === tab.id
           ))}
         </div>
 
-        <motion.button
+<motion.button
           whileHover={{ scale: 1.05 }}
-whileTap={{ scale: 0.95 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setShowAddForm(true)}
           className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all"
         >
@@ -571,7 +541,7 @@ whileTap={{ scale: 0.95 }}
             exit={{ x: -20, opacity: 0 }}
             className="space-y-4 sm:space-y-6"
           >
-{/* Search and Filter Controls */}
+            {/* Search and Filter Controls */}
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
                 <div className="relative">
@@ -619,9 +589,8 @@ whileTap={{ scale: 0.95 }}
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>
                   <p className="text-surface-600 dark:text-surface-400">No deals found</p>
-<p className="text-surface-600 dark:text-surface-400">No deals found</p>
                 </div>
-) : (
+              ) : (
                 filteredDeals.map((deal, index) => (
                   <Link 
                     key={deal.id}
@@ -729,13 +698,13 @@ whileTap={{ scale: 0.95 }}
                             </svg>
                           </motion.button>
                         </div>
+</div>
                       </div>
                     </motion.div>
-</Link>
+                  </Link>
                 ))
               )}
             </div>
-          </motion.div>
         )}
 
         {activeTab === 'analytics' && (
@@ -748,9 +717,9 @@ whileTap={{ scale: 0.95 }}
           >
             {/* Status Overview */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-              <div className="metric-card">
+<div className="metric-card">
                 <div className="flex items-center justify-between">
-<div>
+                  <div>
                     <p className="text-sm font-medium text-surface-600 dark:text-surface-400">Active Deals</p>
                     <p className="text-2xl font-bold text-success">{analytics.activeDeals}</p>
                   </div>
@@ -760,9 +729,9 @@ whileTap={{ scale: 0.95 }}
                 </div>
               </div>
 
-              <div className="metric-card">
+<div className="metric-card">
                 <div className="flex items-center justify-between">
-<div>
+                  <div>
                     <p className="text-sm font-medium text-surface-600 dark:text-surface-400">Dead Deals</p>
                     <p className="text-2xl font-bold text-danger">{analytics.deadDeals}</p>
                   </div>
@@ -772,9 +741,9 @@ whileTap={{ scale: 0.95 }}
                 </div>
               </div>
 
-              <div className="metric-card">
+<div className="metric-card">
                 <div className="flex items-center justify-between">
-<div>
+                  <div>
                     <p className="text-sm font-medium text-surface-600 dark:text-surface-400">Refunded</p>
                     <p className="text-2xl font-bold text-warning">{analytics.refundedDeals}</p>
                   </div>
@@ -835,9 +804,9 @@ whileTap={{ scale: 0.95 }}
                 </h2>
                 <button
                   onClick={() => {
-                    setShowAddForm(false)
+setShowAddForm(false)
                     setEditingDeal(null)
-resetForm()
+                    resetForm()
                   }}
                   className="p-2 hover:bg-surface-100 dark:hover:bg-surface-700 rounded-lg transition-colors"
                 >
@@ -918,8 +887,8 @@ resetForm()
                     </select>
                   </div>
 
-                  <div>
-<label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
+<div>
+                    <label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-2">
                       Category
                     </label>
                     <input
@@ -952,9 +921,9 @@ resetForm()
                   <div className="flex items-center space-x-2">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
-                        key={star}
+key={star}
                         type="button"
-onClick={() => setFormData({ ...formData, rating: star })}
+                        onClick={() => setFormData({ ...formData, rating: star })}
                         className={`p-1 rounded transition-colors ${
                           star <= formData.rating ? 'text-yellow-400' : 'text-surface-300'
                         }`}
