@@ -150,7 +150,7 @@ const sampleDeals = [
       { status: 'active', date: '2024-04-18T09:15:00.000Z' }
     ]
   }
-
+]
 const MainFeature = () => {
   const [deals, setDeals] = useState([])
   const [showAddForm, setShowAddForm] = useState(false)
