@@ -664,7 +664,7 @@ const handleEdit = (deal) => {
                           {deal.category && (
                             <div className="flex items-center space-x-1">
                               <ApperIcon name="Tag" className="w-4 h-4" />
-                              <span>{deal.category}</span>
+<span>{deal.category}</span>
                             </div>
                           )}
                           {deal.refund_date && (
